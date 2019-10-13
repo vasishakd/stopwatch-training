@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Stop Watch</title>
+</head>
+
+<body>
+    <div class="container">
+        <div>
+            <h1 id="timer">0</h1>
+            <h1>Cycles: <span id="cycles-passed">0</span></h1>
+            <button id="start" onclick="start();">Start</button>
+            <button id="stop" onclick="stop();">Stop</button>
+            <button id="reset" onclick="reset();">Reset</button>
+        </div>
+        <div class="inputs">
+            <div>
+                <label for="sec-to-work">WORK</label><br>
+                <input id="sec-to-work" type="text" value="45">
+            </div>
+            <div>
+                <label for="sec-to-work">REST</label><br>
+                <input id="sec-to-rest" type="text" value="15">
+            </div>
+            <div>
+                <label for="cycles">CYCLES</label><br>
+                <input id="cycles" type="text" value="7">
+            </div>
+            <div>
+                <label for="big-rest">BIG REST</label><br>
+                <input id="big-rest" type="text" value="150">
+            </div>
+        </div>
+    </div>
+</body>
+<script src="js/app.js"></script>
+
+</html>
