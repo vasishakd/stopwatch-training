@@ -12,6 +12,8 @@ let isBigRest;
 let minutes;
 let seconds;
 
+let isStart = false;;
+
 function callTimer() {
     sec++;
 
@@ -59,15 +61,19 @@ function callTimer() {
 
 
 function start() {
-    secToWork = parseInt(document.getElementById('sec-to-work').value) + 1;
-    secToRest = parseInt(document.getElementById('sec-to-rest').value) + 1;
-    bigRestSeconds = parseInt(document.getElementById('big-rest').value) + 1;
-    totalCycles = parseInt(document.getElementById('cycles').value);
-    document.getElementById('start').disabled = true;
-    timer = setInterval(callTimer, 1000);
+    setTimeout(function() {
+        document.getElementById('start').disabled = true;
+        isStart = true;
+        secToWork = parseInt(document.getElementById('sec-to-work').value) + 1;
+        secToRest = parseInt(document.getElementById('sec-to-rest').value) + 1;
+        bigRestSeconds = parseInt(document.getElementById('big-rest').value) + 1;
+        totalCycles = parseInt(document.getElementById('cycles').value);
+        timer = setInterval(callTimer, 1000);
+    }, 1000);
 }
 
 function stop() {
+    isStart = false;
     document.getElementById('start').disabled = false;
     clearInterval(timer);
 }
@@ -76,9 +82,20 @@ function reset() {
     stop();
     sec = 0;
     rest = false;
+    isBigRest = false;
     cycles = 0;
     minutes = 0;
     seconds = 0;
     timerElement.style.color = '#000';
     timerElement.innerHTML = sec;
+}
+
+document.onkeyup=function(e){
+  if(e.which === 32) {
+    if (isStart) {
+        stop()
+    } else {
+        start();
+    }
+  }
 }
