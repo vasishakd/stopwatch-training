@@ -11,8 +11,7 @@ let totalCycles;
 let isBigRest;
 let minutes;
 let seconds;
-
-let isStart = false;;
+let isStart = false;
 
 function callTimer() {
     sec++;
@@ -61,6 +60,7 @@ function callTimer() {
 
 
 function start() {
+    sleep.prevent();
     setTimeout(function() {
         document.getElementById('start').disabled = true;
         isStart = true;
@@ -73,6 +73,7 @@ function start() {
 }
 
 function stop() {
+    sleep.allow();
     isStart = false;
     document.getElementById('start').disabled = false;
     clearInterval(timer);
