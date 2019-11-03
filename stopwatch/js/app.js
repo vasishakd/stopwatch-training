@@ -4,8 +4,8 @@ let rest = false;
 let sec = 0;
 let timer;
 let timerElement = document.getElementById('timer');
-let cyclesPassedElement = document.getElementById('cycles-passed');
-let cycles = 0;
+let currentCycleElement = document.getElementById('current-cycle');
+let currentCycle = 1;
 let bigRestSeconds;
 let totalCycles;
 let isBigRest;
@@ -19,31 +19,32 @@ function callTimer() {
     if (!isBigRest) {
          if (sec === secToWork && !rest) {
              sec = 0;
-             cycles++;
 
-            if (cycles === totalCycles) {
+            if (currentCycle === totalCycles) {
                 isBigRest = true;
                 timerElement.style.color = '#33d470';
+                currentCycleElement.innerHTML = 'REST';
             } else {
                 rest = true;
                 timerElement.style.color = '#d64141';
             }
 
-            cyclesPassedElement.innerHTML = cycles;
         } else if (sec === secToRest && rest) {
             sec = 0;
             rest = false;
+            currentCycle++;
             timerElement.style.color = '#000';
+            currentCycleElement.innerHTML = currentCycle;
         }
     } else {
         if (sec === bigRestSeconds) {
             isBigRest = false;
-            cycles = 0;
+            currentCycle = 1;
             sec = 0;
             minutes = 0;
             seconds = 0;
             timerElement.style.color = '#000';
-            cyclesPassedElement.innerHTML = cycles;
+            currentCycleElement.innerHTML = currentCycle;
         }
     }
 
@@ -68,6 +69,7 @@ function start() {
         secToRest = parseInt(document.getElementById('sec-to-rest').value) + 1;
         bigRestSeconds = parseInt(document.getElementById('big-rest').value) + 1;
         totalCycles = parseInt(document.getElementById('cycles').value);
+        currentCycleElement.innerHTML = currentCycle;
         timer = setInterval(callTimer, 1000);
     }, 1000);
 }
@@ -84,9 +86,10 @@ function reset() {
     sec = 0;
     rest = false;
     isBigRest = false;
-    cycles = 0;
+    currentCycle = 1;
     minutes = 0;
     seconds = 0;
+    currentCycleElement.innerHTML = 0;
     timerElement.style.color = '#000';
     timerElement.innerHTML = sec;
 }
