@@ -1,0 +1,291 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/monokai.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h1>PHP 7.4</h1>
+				</section>
+				<section>
+					<h2>Что нового:</h2>
+					<ol>
+						<li><a href="#/2">Типизированные свойства классов</a></li>
+						<li><a href="#/3">Стрелочные функции</a></li>
+						<li><a href="#/4">Присваивающий оператор объединения с null (??=)</a></li>
+						<li><a href="#/5">Ковариантность/контравариантность</a></li>
+						<li><a href="#/6">Оператор распаковки в массивах</a></li>
+						<li><a href="#/7">Интерфейс внешних функций</a></li>
+                        <li><a href="#/8">Предзагрузка для улучшения производительности</a></li>
+                        <li><a href="#/9">Deprecations</a></li>
+                        <li><a href="#/10">Остальное</a></li>
+					</ol>
+				</section>
+				<section>
+					<h3>Типизированные свойства классов (<a href="https://wiki.php.net/rfc/typed_properties_v2">RFC</a>)s</h3>
+					<pre><code class="hljs php" contenteditable data-trim>
+						class Foo 
+						{
+							public string $version;
+							public ?int $number;
+							public Bar $bar;
+						}
+					</code></pre>
+					<p>Нельзя использовать типы <b>void</b> и <i>callable</i></p>
+				</section>
+				<section>
+                    <section>
+                        <h3>Стрелочные функции (<a href="https://wiki.php.net/rfc/arrow_functions_v2">RFC</a>)</h3>
+                        <pre><code class="hljs" contenteditable data-trim>
+                            //PHP 7.3
+                            $users = array_filter($users, function ($user) use ($name) {
+                                return $user->name === $name;
+                            }
+
+                            //PHP 7.4
+                            users = array_filter($users, fn($user) => $user->name == $name);
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>Стрелочные функции</h3>
+                        <ul>
+                            <li>Они могут получить доступ к parent области, таким образом, нет необходимости использовать ключевое слово use</li>
+                            <li><span class="hljs-variable">$this</span> тоже доступна, как и в обычных анонимных функциях</li>
+                            <li>Стрелочные функции могут содержать только одну строку, которая также является оператором возврата значения</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>Стрелочные функции</h3>
+                        <p>В сигнатуре стрелочной функции, как и в обычной функции, можно указывать типы, дефолты и прочее</p>
+                        <pre><code class="hljs" contenteditable data-trim>
+                            fn(array $x) => $x;
+                            fn(): int => $x;
+                            fn($x = 42) => $x;
+                            fn(&$x) => $x;
+                            fn&($x) => $x;
+                            fn($x, ...$rest) => $rest;
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>Стрелочные функции</h3>
+                        <p>Замыкание переменных</p>
+                        <pre><code class="hljs php" contenteditable data-trim>
+                            $y = 1;
+
+                            //PHP 7.3
+                            $fn1 = function ($x) use ($y) {
+                                return $x + $y;
+                            };
+
+                            //PHP 7.4
+                            $fn1 = fn($x) => $x + $y;
+                        </code></pre>
+                    </section>
+				</section>
+                <section>
+                    <h4>Присваивающий оператор объединения с null ??= (<a href="https://wiki.php.net/rfc/spread_operator_for_array">RFC</a>)</h3>
+                    <pre><code class="hljs php" contenteditable data-trim>
+                        //PHP 7.3
+                        $user->created_at = $user->created_at ?? now();
+
+                        //PHP 7.4
+                        $user->created_at ??= now();
+                    </code></pre>
+                </section>
+                <section>
+                    <section>
+                        <h3>Ковариантность/контравариантность (<a href="https://wiki.php.net/rfc/covariant-returns-and-contravariant-parameters">RFC</a>)</h3>
+                        <p>Данное изменение позволяет изменять тип параметра на один из его супертипов. В свою очередь возвращаемый тип можно заменить на его подтип</p>
+                    </section>
+                    <section>
+                        <h3>Ковариантность</h3>
+                        <pre><code class="hljs php" contenteditable data-trim>
+                            interface Factory {
+                                function make(): object;
+                            }
+                             
+                            class UserFactory implements Factory {
+                                function make(): User;
+                            }
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>Контравариантность</h3>
+                        <pre><code class="hljs php" contenteditable data-trim>
+                            interface Concatable {
+                                function concat(Iterator $input); 
+                            }
+
+                            class Collection implements Concatable {
+                                // accepts all iterables, not just Iterator
+                                function concat(iterable $input) {/* . . . */}
+                            }
+                        </code></pre>
+                    </section>
+                </section>
+                <section>
+                    <h3>Оператор распаковки в массивах (<a href="">RFC</a>)</h3>
+                    <pre><code class="hljs php" contenteditable data-trim>
+                        $arrayA = [1, 2, 3];
+                        $arrayB = [4, 5];
+                        $result = [0, ...$arrayA, ...$arrayB, 6 ,7];
+                        //[0, 1, 2, 3, 4, 5, 6, 7]
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>Интерфейс внешних функций (<a href="https://wiki.php.net/rfc/ffi">RFC</a>)</h3>
+                    <p>Интерфейс внешних функций (FFI) позволяет писать код на C непосредственно в PHP-коде. Это означает, что расширения PHP могут быть написаны на чистом PHP.</p>
+                    <pre><code class="hljs php" contenteditable data-trim>
+                        // create FFI object, loading libc and exporting function printf()
+                        $ffi = FFI::cdef(
+                            "int printf(const char *format, ...);", // this is regular C declaration
+                            "libc.so.6");
+                        // call C printf()
+                        $ffi->printf("Hello %s!\n", "world");
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>Предзагрузка (<a href="https://wiki.php.net/rfc/preload">RFC</a>)</h3>
+                    <blockquote>
+                        On server startup – before any application code is run – we may load a certain set of PHP files into memory – and make their contents “permanently available” to all subsequent requests that will be served by that server. All the functions and classes defined in these files will be available to requests out of the box, exactly like internal entities.
+                    </blockquote>
+                </section>
+                <section>
+                    <section>
+                        <h3>Deprecations (<a href="https://wiki.php.net/rfc/deprecations_php_7_4">RFC</a>)</h3>
+                        <ul>
+                            <li>Тип real</li>
+                            <li><span class="hljs-code">array_key_exists()</span> с объектами</li>
+                            <li><span class="hljs-code">implode()</span> произвольный порядок параметров</li>
+                            <li>фигурные скобки при обращении к элементу массива <span class="hljs-code">$array{1}</span></li>
+                            <li><span class="hljs-code">parent::</span> без родительского класса</li>
+                            <li>Короткий тэг <span class="hljs-code">&lt;?</span></li>
+                            <li>Левоассоциативный тернарный оператор</li>
+                        </ul>
+                        <pre><code class="hljs php" contenteditable data-trim>
+                            1 ? 2 : 3 ? 4 : 5;   // deprecated
+                            (1 ? 2 : 3) ? 4 : 5; // ok
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h4>Приоритет операций при конкатенации</h4>
+                        <pre><code class="hljs php" contenteditable data-trim>
+                            echo "sum: " . $a + $b; // deprecated warning
+
+                            //PHP NOW
+                            echo ("sum: " . $a) + $b;
+
+                            //PHP 8
+                            echo "sum :" . ($a + $b);
+                        </code></pre>
+                    </section>
+                </section>
+                <section>
+                    <section>
+                        <h3>Остальное</h3>
+                        <p>Пользовательская сериализация объектов (<a href="https://wiki.php.net/rfc/custom_object_serialization">RFC</a>)</p>
+                        <pre><code class="hljs php" contenteditable data-trim>
+                                class A {
+                                    private $prop_a;
+                                    public function __serialize(): array {
+                                        return ["prop_a" => $this->prop_a];
+                                    }
+                                    public function __unserialize(array $data) {
+                                        $this->prop_a = $data["prop_a"];
+                                    }
+                                }
+                                class B extends A {
+                                    private $prop_b;
+                                    public function __serialize(): array {
+                                        return [
+                                            "prop_b" => $this->prop_b,
+                                            "parent_data" => parent::__serialize(),
+                                        ];
+                                    }
+                                    public function __unserialize(array $data) {
+                                        parent::__unserialize($data["parent_data"]);
+                                        $this->prop_b = $data["prop_b"];
+                                    }
+                                }
+                        </code></pre> 
+                    </section>
+                    <section>
+                        <h4>Поддержка исключений в __toString (<a href="https://wiki.php.net/rfc/tostring_exceptions">RFC</a>)</p>
+                        <pre><code class="hljs php" contenteditable data-trim>
+                            class Foo {
+                                public function __toString() 
+                                {
+                                    throw new Exception('Hello there');
+                                }
+                            }
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h4>Разделитель числовых литералов (<a href="https://wiki.php.net/rfc/numeric_literal_separator">RFC</a>)</h4>
+                        <pre><code class="hljs php" contenteditable data-trim>
+                            1_000_000_000  // int
+                            6.674_083e-11; // float
+                            299_792_458;   // decimal
+                            0xCAFE_F00D;   // hexadecimal
+                            0b0101_1111;   // binary
+                            0137_041;      // octal
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h4>Слабые ссылки (<a href="https://wiki.php.net/rfc/weakrefs">RFC</a>)</h4>
+                        <p>Слабые ссылки позволяют сохранить ссылку на объект, которая не препятствует уничтожению этого объекта. Например, они полезны для реализации кэш-подобных структур.</p>
+                        <pre><code class="hljs php" contenteditable data-trim>
+                            $object = new stdClass;
+                            $weakRef = WeakReference::create($object);
+
+                            var_dump($weakRef->get()); // object(stdClass)#1 (0) {}
+                            unset($object);
+                            var_dump($weakRef->get()); // null
+                        </code></pre>
+                    </section>           
+                </section>
+			</div>
+		</div>
+
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				slideNumber: true,
+				hash: true,
+				width: 1180,
+				height: 700,
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true }
+				]
+			});
+		</script>
+	</body>
+</html>
