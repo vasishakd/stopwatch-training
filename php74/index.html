@@ -44,16 +44,48 @@
 					</ol>
 				</section>
 				<section>
-					<h3>Типизированные свойства классов (<a href="https://wiki.php.net/rfc/typed_properties_v2">RFC</a>)</h3>
-					<pre><code class="hljs php" contenteditable data-trim>
-						class Foo 
-						{
-							public string $version;
-							public ?int $number;
-							public Bar $bar;
-						}
-					</code></pre>
-					<p>Нельзя использовать типы <b>void</b> и <i>callable</i></p>
+                    <section>
+                        <h3>Типизированные свойства классов (<a href="https://wiki.php.net/rfc/typed_properties_v2">RFC</a>)</h3>
+                        <pre><code class="hljs php" contenteditable data-trim>
+                            class Foo
+                            {
+                                public string $version;
+                                public ?int $number;
+                                public Bar $bar;
+                            }
+					    </code></pre>
+                        <p>Нельзя использовать типы <b>void</b> и <i>callable</i></p>
+                    </section>
+					<section>
+                        <h4>Изменение типов при наследовании</h4>
+                        <pre><code class="hljs php" contenteditable data-trim>
+                            class A {
+                                private bool $a;
+                                public int $b;
+                                public ?int $c;
+                            }
+                            class B extends A {
+                                public string $a; // legal, because A::$a is private
+                                public ?int $b;   // ILLEGAL
+                                public int $c;    // ILLEGAL
+                            }
+					    </code></pre>
+                    </section>
+					<section>
+                        <h4>Обращение к неинициализированной переменной</h4>
+                        <pre><code class="hljs php" contenteditable data-trim>
+                            class Foo
+                            {
+                                public int $bar;
+                            }
+
+                            $foo = new Foo;
+                            var_dump($foo->bar);
+
+                            //Fatal error: Uncaught Error: Typed property Foo::$bar
+                            //must not be accessed before initialization
+					    </code></pre>
+                    </section>
 				</section>
 				<section>
                     <section>
