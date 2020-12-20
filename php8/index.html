@@ -1,0 +1,229 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>reveal.js</title>
+
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/black.css" id="theme">
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section>
+            <h1>PHP 8</h1>
+            <p>Денис Васишак, Студия "Флаг"</p>
+        </section>
+        <section>
+            <section>
+                <h3>Union types (<a href="https://wiki.php.net/rfc/union_types_v2">RFC</a>)</h3>
+                <pre data-id="code-animation"><code class="hljs php" contenteditable data-trim>
+                    public function foo(Foo|Bar $input): int|float;
+                </code></pre>
+            </section>
+            <section>
+                <p>
+                    <span class="hljs-variable">void</span> не может использваться как часть union types, т.к. <span class="hljs-variable">void</span> означает "не возвращает ничего". Более того, nullable unions могут быть написаны используя <span class="hljs-keyword">|null</span> или <span class="hljs-keyword">?</span>
+                </p>
+                <pre data-id="code-animation"><code class="hljs php" contenteditable data-trim>
+                    public function foo(Foo|null $foo): void;
+
+                    public function bar(?Bar $bar): void;
+                </code></pre>
+            </section>
+        </section>
+        <section>
+            <h3>Именованные аргументы (<a href="https://wiki.php.net/rfc/named_params">RFC</a>)</h3>
+            <p>Именованные аргументы позволяют передавать значения в функцию указывая имя значения.
+                Не обязательно соблюдать порядок объявления и также можно пропускать необязательные параметры</p>
+            <pre data-id="code-animation"><code class="hljs php" contenteditable data-trim>
+                function foo(string $a, string $b, ?string $c = null, ?string $d = null)
+
+                foo(
+                    b: 'value b',
+                    a: 'value a',
+                    d: 'value d',
+                );
+            </code></pre>
+        </section>
+        <section>
+            <h3>Атрибуты (<a href="https://wiki.php.net/rfc/attributes_v2">RFC</a>)</h3>
+            <pre data-id="code-animation"><code class="hljs php" contenteditable data-trim>
+                class PostsController
+                {
+                    #[Route("/api/posts/{id}", methods: ["GET"])]
+                    public function get($id) { /* ... */ }
+                }
+            </code></pre>
+        </section>
+        <section>
+            <h3>Выражение Match (<a href="https://wiki.php.net/rfc/match_expression_v2">RFC</a>)</h3>
+            <pre data-id="code-animation"><code class="hljs php" contenteditable data-trim>
+                echo match (8.0) {
+                  '8.0' => "О нет!",
+                  8.0 => "То, что я и ожидал",
+                };
+                //> То, что я и ожидал
+            </code></pre>
+            <ul>
+                <li>Match — это выражение, его результат может быть сохранён в переменной или возвращён.</li>
+                <li>Условия match поддерживают только однострочные выражения, для которых не требуется управляющая конструкция break;.</li>
+                <li>Выражение match использует строгое сравнение.</li>
+            </ul>
+        </section>
+        <section>
+            <h3>Оператор Nullsafe (<a href="https://wiki.php.net/rfc/nullsafe_operator">RFC</a>)</h3>
+            <pre data-id="code-animation"><code class="hljs php" contenteditable data-trim>
+                //PHP 7.4
+                $country =  null;
+                if ($session !== null) {
+                  $user = $session->user;
+                  if ($user !== null) {
+                    $address = $user->getAddress();
+                    if ($address !== null) {
+                      $country = $address->country;
+                    }
+                  }
+                }
+            </code></pre>
+            <pre data-id="code-animation"><code class="hljs php" contenteditable data-trim>
+                //Laravel
+                $country = optional(optional(optional($session)->user)->getAddress())->country;
+            </code></pre>
+            <pre data-id="code-animation"><code class="hljs php" contenteditable data-trim>
+                //PHP 8
+                $country = $session?->user?->getAddress()?->country;
+            </code></pre>
+        </section>
+        <section>
+            <h3>Объявление свойств в конструкторе (<a href="https://wiki.php.net/rfc/constructor_promotion">RFC</a>)</h3>
+            <pre data-id="code-animation"><code class="hljs php" contenteditable data-trim>
+                class Point {
+                  public float $x;
+                  public float $y;
+                  public float $z;
+
+                  public function __construct(float $x, float $y, float $z) {
+                    $this->x = $x;
+                    $this->y = $y;
+                    $this->z = $z;
+                  }
+                }
+            </code></pre>
+            <pre data-id="code-animation"><code class="hljs php" contenteditable data-trim>
+                class Point {
+                  public function __construct(
+                    public float $x,
+                    public float $y,
+                    public float $z,
+                  ) {}
+                }
+            </code></pre>
+        </section>
+        <section>
+            <h3>Улучшенное сравнение строк и чисел (<a href="https://wiki.php.net/rfc/string_to_number_comparison">RFC</a>)</h3>
+            <pre data-id="code-animation"><code class="hljs php" contenteditable data-trim>
+                //PHP 7.4
+                0 == 'foobar' // true
+            </code></pre>
+            <pre data-id="code-animation"><code class="hljs php" contenteditable data-trim>
+                //PHP 8
+                0 == 'foobar' // false
+            </code></pre>
+            <p>При сравнении с числовой строкой PHP 8 использует сравнение чисел. В противном случае число преобразуется в строку и используется сравнение строк.</p>
+        </section>
+        <section>
+            <h3>JIT (<a href="https://wiki.php.net/rfc/jit">RFC</a>)</h3>
+            <img style="background: #cccccc" src="https://www.php.net/images/php8/scheme.svg" alt="">
+        </section>
+        <section>
+            <h3>Возвращаемый тип static (<a href="https://wiki.php.net/rfc/static_return_type">RFC</a>)</h3>
+            <pre data-id="code-animation"><code class="hljs php" contenteditable data-trim>
+                class Foo
+                {
+                    public function test(): static
+                    {
+                        return new static();
+                    }
+                }
+            </code></pre>
+        </section>
+        <section>
+            <h3>Выражение Throw (<a href="https://wiki.php.net/rfc/throw_expression">RFC</a>)</h3>
+            <pre data-id="code-animation"><code class="hljs php" contenteditable data-trim>
+                $triggerError = fn () => throw new MyError();
+
+                $foo = $bar['offset'] ?? throw new OffsetDoesNotExist('offset');
+            </code></pre>
+        </section>
+        <section>
+            <h3>Weak map (<a href="https://wiki.php.net/rfc/weak_maps">RFC</a>)</h3>
+            <p>Слабые карты (weak maps) позволяют создавать связи между объектами и произвольными значениями (как и SplObjectStorage), при этом объекты, используемые в качестве ключей, не защищаются от сборщика мусора. Если сборщик уничтожает такой объект, тот просто удаляется из карты.</p>
+        </section>
+        <section>
+            <h3>Блок catch без указания переменной (<a href="https://wiki.php.net/rfc/non-capturing_catches">RFC</a>)</h3>
+            <pre data-id="code-animation"><code class="hljs php" contenteditable data-trim>
+                try {
+                    // Something goes wrong
+                } catch (Exception) {
+                    Log::error("Something went wrong");
+                }
+            </code></pre>
+        </section>
+        <section>
+            <h4>Разрешена запятая в конце списка параметров (<a href="https://wiki.php.net/rfc/trailing_comma_in_parameter_list">RFC</a>) и в списке use замыканий (<a href="https://wiki.php.net/rfc/trailing_comma_in_closure_use_list">RFC</a>)</h4>
+            <pre data-id="code-animation"><code class="hljs php" contenteditable data-trim>
+                public function(
+                    string $a,
+                    int $b,
+                    Foo $foo,
+                ) {
+                    // …
+                }
+            </code></pre>
+        </section>
+        <section>
+            <h4>Достойно упоминания:</h4>
+            <ul>
+                <li>Оператор @ больше не подавляет фатальные ошибки.</li>
+                <li>Новый тип mixed <a href="https://wiki.php.net/rfc/mixed_type_v2">RFC</a></li>
+                <li>Добавление ::class для объектов </li>
+                <li><a href="https://wiki.php.net/rfc/str_contains">str_contains()</a>, <a href="https://wiki.php.net/rfc/add_str_starts_with_and_ends_with_functions">str_starts_with()</a>,
+                    <a href="https://wiki.php.net/rfc/add_str_starts_with_and_ends_with_functions">str_ends_with()</a></li>
+                <li>Фатальная ошибка при несовместимости сигнатур методов <a href="https://wiki.php.net/rfc/lsp_errors">RFC</a></li>
+                <li>Правильные сигнатуры магических методов <a href="https://wiki.php.net/rfc/magic-methods-signature">RFC</a></li>
+            </ul>
+        </section>
+        <section>
+            <img src="data:image/png;base64,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" alt="">
+            <p><a href="https://vasishakd.github.io/php8">https://vasishakd.github.io/php8</a></p>
+        </section>
+    </div>
+</div>
+
+<script src="dist/reveal.js"></script>
+<script src="plugin/notes/notes.js"></script>
+<script src="plugin/markdown/markdown.js"></script>
+<script src="plugin/highlight/highlight.js"></script>
+<script>
+    // More info about initialization & config:
+    // - https://revealjs.com/initialization/
+    // - https://revealjs.com/config/
+    Reveal.initialize({
+        hash: true,
+        slideNumber: true,
+        width: 1050,
+        height: 700,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/black.css" id="theme">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h1>PHP 8</h1>
+					<p>Денис Васишак, Студия "Флаг"</p>
+				</section>
+				<section>
+					<section>
+						<h3>Union types (<a href="https://wiki.php.net/rfc/union_types_v2">RFC</a>)</h3>
+						<pre data-id="code-animation"><code class="hljs php" contenteditable data-trim>
+						public function foo(Foo|Bar $input): int|float;
+						</code></pre>
+					</section>
+					<section>
+						<p>
+							Note that <span class="hljs-variable">void</span> can never be part of a union type, since it indicates "no return value at all". Furthermore, nullable unions can be written using <span class="hljs-keyword">|null</span>, or by using the existing <span class="hljs-keyword">?</span> notation
+						</p>
+						<pre data-id="code-animation"><code class="hljs php" contenteditable data-trim>
+						public function foo(Foo|null $foo): void;
+
+						public function bar(?Bar $bar): void;
+						</code></pre>
+					</section>
+				</section>
+				<section>
+					<h3>Named arguments (<a href="https://wiki.php.net/rfc/named_params">RFC</a>)</h3>
+					<p>Named arguments allow you to pass in values to a function, by specifying the value name,
+						so that you don't have to take their order into consideration,
+						and you can also skip optional parameters!</p>
+				</section>
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+				slideNumber: true,
+				width: 1100,
+				height: 700,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>
