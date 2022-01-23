@@ -9,8 +9,13 @@ body {
 
 
 #timer {
-    font-size: 220px;
-    margin: 100px;
+    font-size: 220pt;
+    margin-top: 0;
+    margin-bottom: 50px;
+}
+
+h1 {
+    margin: 2px;
 }
 
 button {
@@ -40,7 +45,7 @@ input {
     text-align: center;
 }
 
-.inputs > div {
+#inputs > div {
     display: inline-block;
     margin: 10px;
 }

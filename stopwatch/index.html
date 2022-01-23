@@ -12,27 +12,29 @@
     <div class="container">
         <div>
             <h1 id="timer">0</h1>
-            <h1>Current cycle: <span id="current-cycle">0</span></h1>
+            <h1>Current set: <span id="current-set">0</span></h1>
+            <h1>Current round: <span id="current-round">0</span></h1>
             <button id="start" onclick="start();">Start</button>
             <button id="stop" onclick="stop();">Stop</button>
             <button id="reset" onclick="reset();">Reset</button>
+            <button id="reset" onclick="toDefault();">Default</button>
         </div>
-        <div class="inputs">
+        <div id="inputs">
             <div>
                 <label for="sec-to-work">WORK</label><br>
-                <input id="sec-to-work" type="text" value="45">
+                <input id="sec-to-work" type="text" value="45" default-value="45">
             </div>
             <div>
                 <label for="sec-to-rest">REST</label><br>
-                <input id="sec-to-rest" type="text" value="15">
+                <input id="sec-to-rest" type="text" value="15" default-value="15">
             </div>
             <div>
-                <label for="cycles">CYCLES</label><br>
-                <input id="cycles" type="text" value="7">
+                <label for="sets">SETS</label><br>
+                <input id="sets" type="text" value="7" default-value="7">
             </div>
             <div>
                 <label for="big-rest">BIG REST</label><br>
-                <input id="big-rest" type="text" value="150">
+                <input id="big-rest" type="text" value="120" default-value="120">
             </div>
         </div>
     </div>
