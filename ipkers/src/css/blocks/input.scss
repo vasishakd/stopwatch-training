@@ -1,0 +1,23 @@
+.main-input {
+    padding: 12px;
+    background-color: $white;
+    border: 1px solid transparent;
+    font-size: 18px;
+    line-height: 22px;
+    color: $text-color;
+
+    &:focus {
+        outline: none;
+        border-color: $text-color;
+    }
+
+    &::placeholder {
+        color: $gray;
+    }
+}
+
+@include tablet-sm {
+    .main-input::placeholder {
+        font-size: 14px;
+    }
+}

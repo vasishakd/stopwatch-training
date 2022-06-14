@@ -1,0 +1,50 @@
+.main-button {
+    font-size: 18px;
+    font-weight: $semibold;
+    color: $white;
+    font-family: $font-family-base;
+    padding: 14px;
+    text-transform: uppercase;
+    background-color: $red;
+    display: inline-block;
+    text-align: center;
+    transition: .25s background-color ease;
+
+    &:hover, &:focus {
+        outline: none;
+        background-color: lighten($red, 10%);
+    }
+}
+
+.secondary-button {
+    font-size: 18px;
+    font-weight: $semibold;
+    color: $red;
+    font-family: $font-family-base;
+    padding: 12px;
+    text-transform: uppercase;
+    background-color: $white;
+    border: 1px solid $red;
+    display: inline-block;
+    text-align: center;
+    transition: .25s background-color ease;
+
+    &:hover, &:focus {
+        outline: none;
+        background-color: lighten($red, 40%);
+    }
+}
+
+.welcome-section__social-icon {
+    fill: $text-color;
+}
+
+@include tablet-sm {
+    .main-button {
+        font-size: 14px;
+    }
+
+    .secondary-button {
+        font-size: 14px;
+    }
+}

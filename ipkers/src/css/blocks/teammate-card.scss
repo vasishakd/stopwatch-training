@@ -1,0 +1,66 @@
+.teammate-card {
+    text-align: center;
+}
+
+.teammate-card__img-box {
+    width: 170px;
+    height: 170px;
+    margin:0 auto 25px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.teammate-card__img {
+    widows: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.teammate-card__name {
+    font-size: 24px;
+    font-weight: $semibold;
+}
+
+.teammate-card__profession {
+    font-size: 24px;
+    font-weight: $semibold;
+    color: $green;
+    margin-bottom: 12px;
+}
+
+.teammate-card__text {
+    font-size: 18px;
+}
+
+.our-team__show-more-button {
+    background-color: $green;
+
+    &:hover, &:focus {
+        background-color: lighten($green, 10%);
+    }
+}
+
+@include tablet-lg {
+    .teammate-card__img-box {
+        width: 140px;
+        height: 140px;
+    }
+
+    .teammate-card__name {
+        font-size: 18px;
+    }
+
+    .teammate-card__profession {
+        font-size: 18px;
+    }
+
+    .teammate-card__text {
+        font-size: 14px;
+    }
+}
+
+@include tablet-sm {
+    .teammate-card__img-box {
+        margin-bottom: 15px;
+    }
+}

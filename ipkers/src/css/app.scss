@@ -1,0 +1,41 @@
+@import "fonts";
+@import "reset";
+@import "variables";
+@import "mixins";
+@import "base";
+
+@import "../../node_modules/@glidejs/glide/dist/css/glide.core.min";
+@import "../../node_modules/@fancyapps/ui/dist/fancybox";
+
+@import "blocks/general";
+@import "blocks/button";
+@import "blocks/input";
+@import "blocks/header";
+@import "blocks/main-menu";
+@import "blocks/welcome-section";
+@import "blocks/tour-card";
+@import "blocks/current-tours";
+@import "blocks/advantages";
+@import "blocks/advantage-card";
+@import "blocks/callback-section";
+@import "blocks/schedule-section";
+@import "blocks/our-team";
+@import "blocks/teammate-card";
+@import "blocks/reviews-section";
+@import "blocks/review-card";
+@import "blocks/contacts";
+@import "blocks/footer";
+@import "blocks/callback-modal";
+@import "blocks/mobile-menu";
+@import "blocks/hikes-list";
+
+// tour page
+@import "blocks/tour-main-info";
+@import "blocks/tour-main-content";
+@import "blocks/tour-gallery";
+@import "blocks/tour-attractions";
+@import "blocks/tour-route";
+@import "blocks/tour-price-includings";
+@import "blocks/tour-callback";
+@import "blocks/tour-important-info";
+@import "blocks/tour-aside-card";

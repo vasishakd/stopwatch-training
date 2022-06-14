@@ -1,0 +1,39 @@
+.tour-callback {
+  width: 100%;
+  padding: 80px 30px;
+  background-image: url("../../img/tour-callback-bg.jpg");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 80px;
+}
+
+.tour-callback__title {
+  font-size: 26px;
+  font-weight: $bold;
+  color: $text-color;
+  margin-bottom: 8px;
+}
+
+.tour-callback__description {
+  font-size: 16px;
+  font-weight: $regular;
+  color: $text-color;
+  margin-bottom: 46px;
+}
+
+.tour-callback__form {
+  display: flex;
+  column-gap: 18px;
+  margin-bottom: 12px;
+}
+
+.tour-callback__confirm-description {
+  font-size: 12px;
+  font-weight: $regular;
+  color: $text-color;
+  background-color: transparent;
+}

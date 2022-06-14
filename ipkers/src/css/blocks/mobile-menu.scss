@@ -1,0 +1,31 @@
+.mobile-menu {
+    display: none;
+    background-color: $white;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transform: translateY(100%);
+    padding: 0 20px;
+    z-index: 1;
+
+    &.active {
+        display: block;
+    }
+}
+
+.mobile-menu__link {
+    width: 210px;
+    display: block;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: $semibold;
+    padding: 12px 0;
+}
+
+.mobile-menu__item {
+    border-bottom: 1px solid $gray;
+
+    &:last-child {
+        border-bottom-width: 0;
+    }
+}

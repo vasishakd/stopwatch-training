@@ -1,0 +1,51 @@
+.tour-aside-card {
+  width: 260px;
+  border: 1px solid #e5e5e5;
+  padding: 24px;
+  position: sticky;
+  top: 40px;
+  margin-bottom: 40px;
+}
+
+.tour-aside-card__dates-title {
+  font-size: 14px;
+  font-weight: $regular;
+  color: $gray;
+  margin-bottom: 4px;
+}
+
+.tour-aside-card__dates-list {
+  margin-bottom: 12px;
+}
+
+.tour-aside-card__date {
+  width: 100%;
+  font-size: 18px;
+  font-weight: $regular;
+  color: $text-color;
+  padding: 10px 0 8px;
+  border-bottom: 1px solid #e5e5e5;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.tour-aside-card__week-day {
+  display: block;
+  font-size: 12px;
+  font-weight: $regular;
+  color: $gray;
+}
+
+.tour-aside-card__price {
+  font-size: 26px;
+  font-weight: $bold;
+  color: $text-color;
+  margin-bottom: 22px;
+  display: block;
+}
+
+.tour-aside-card__order-button {
+  width: 100%;
+}

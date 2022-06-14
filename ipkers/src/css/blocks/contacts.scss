@@ -1,0 +1,228 @@
+.contacts {
+    padding: 100px 0;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.contacts__inner {
+    @include inner;
+    flex-direction: column;
+    align-items: center;
+    max-width: 926px;
+}
+
+.contacts__title {
+    font-size: 48px;
+    font-weight: $bold;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.contacts__description {
+    font-size: 24px;
+    margin-bottom: 90px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.contacts__logo {
+    margin-right: 10px;
+}
+
+.contacts__content {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 30px;
+}
+
+.contacts__text {
+    font-size: 24px;
+    font-weight: $semibold;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+}
+
+.contacts__email {
+    text-transform: lowercase;
+}
+
+.contacts__social-list {
+    display: flex;
+}
+
+.contacts__social-item {
+    margin-right: 11px;
+    
+    &:last-child {
+        margin-right: 0;
+    }
+}
+
+.contacts__social-link {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $white;
+    border-radius: 50%;
+    transition: .25s background-color ease;
+
+    &:hover, &:focus {
+        background-color: lighten($red, 35%);
+    }
+}
+
+.contacts__callback-form {
+    width: 450px;
+    display: flex;
+    flex-direction: column;
+}
+
+.contacts__input {
+    width: 305px;
+    margin-bottom: 10px;
+    border-color: $gray;
+}
+
+.contacts__submit {
+    width: 305px;
+    margin-bottom: 20px;
+}
+
+.contacts__checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    cursor: pointer;
+    justify-content: flex-start;
+    width: 250px;
+}
+
+.contacts__checkbox {
+    width: 22px;
+    height: 22px;
+    background-color: $white;
+    position: relative;
+    flex-shrink: 0;
+    display: inline-block;
+    margin-right: 17px;
+    border: 1px solid $gray;
+
+    &::before {
+        content: "";
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0;
+        background-color: $text-color;
+    }
+}
+
+.contacts__checkbox-icon {
+    fill: $text-color;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: .25s opacity ease;
+}
+
+.contacts__checkbox-input:checked + .contacts__checkbox .contacts__checkbox-icon {
+    opacity: 1;
+}
+
+.contacts__checkbox-input:focus + .contacts__checkbox {
+    border-color: $text-color;
+}
+
+.contacts__checkbox-text {
+    font-size: 18px;
+}
+
+@include tablet-lg {
+    .contacts__description {
+        margin-bottom: 50px;
+    }
+
+    .contacts__content {
+        grid-template-columns: 1fr;
+        justify-content: center;
+    }
+
+    .contacts__callback-form {
+        align-items: center;
+        width: auto;
+    }
+
+    .contacts__text-box {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .contacts__social-list {
+        justify-content: center;
+    }
+}
+
+@include tablet-md {
+    .contacts__title {
+        font-size: 32px;
+    }
+
+    .contacts__description {
+        font-size: 18px;
+    }
+
+    .contacts__logo {
+        display: none;
+    }
+}
+
+@include tablet-sm {
+    .contacts {
+        padding: 50px 0;
+    }
+    
+    .contacts__title {
+        font-size: 20px;
+    }
+
+    .contacts__description {
+        margin-bottom: 30px;
+        font-size: 14px;
+    }
+
+    .contacts__text {
+        font-size: 14px;
+        margin-bottom: 7px;
+    }
+
+    .contacts__social-list {
+        margin-top: 20px;
+    }
+
+    .contacts__input {
+        width: 100%;
+    }
+
+    .contacts__submit {
+        width: 100%;
+    }
+
+    .contacts__checkbox-text {
+        font-size: 14px;
+    }
+
+    .contacts__checkbox-label {
+        width: 210px;
+    }
+}
