@@ -1,0 +1,115 @@
+.our-team {
+    padding: 100px 0;
+}
+
+.our-team__inner {
+    @include inner;
+    flex-direction: column;
+    align-items: center;
+}
+
+.our-team__title {
+    font-size: 48px;
+    font-weight: $bold;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.our-team__description {
+    font-size: 24px;
+    margin-bottom: 90px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.our-team__logo {
+    margin-right: 10px;
+}
+
+.our-team__teammates-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 370px);
+    justify-content: space-between;
+    grid-gap: 90px 20px;
+    margin-bottom: 110px;
+}
+
+@include screen-md {
+    .our-team__teammates-grid {
+        grid-template-columns: repeat(3, 1fr);
+        margin-bottom: 70px;
+    }
+}
+
+@include tablet-lg {
+    .our-team__description {
+        margin-bottom: 50px;
+    }
+
+    .our-team__teammates-grid {
+        grid-row-gap: 50px;
+    }
+
+    .our-team__teammate-card {
+        display: none;
+
+        &:nth-child(1),
+        &:nth-child(2),
+        &:nth-child(3) {
+            display: block;
+        }
+    }
+}
+
+@include tablet-md {
+    .our-team__title {
+        font-size: 32px;
+    }
+
+    .our-team__description {
+        font-size: 18px;
+    }
+
+    .our-team__logo {
+        display: none;
+    }
+
+    .our-team__teammates-grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+        margin-bottom: 50px;
+        grid-row-gap: 40px;
+    }
+}
+
+@include tablet-sm {
+    .our-team {
+        padding: 50px 0;
+    }
+    
+    .our-team__title {
+        font-size: 20px;
+    }
+
+    .our-team__description {
+        margin-bottom: 40px;
+        font-size: 14px;
+    }
+
+    .our-team__teammate-card:nth-child(3) {
+        display: none;
+    }
+
+    .our-team__teammates-grid {
+        grid-row-gap: 30px;
+        margin-bottom: 30px;
+    }
+}
+
+@include phone-lg {
+    .our-team__show-more-button {
+        width: 100%;
+    }
+}

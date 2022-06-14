@@ -1,0 +1,27 @@
+.tour-attractions {
+  margin: 80px 0;
+}
+
+.tour-attractions__attraction-title {
+  font-size: 18px;
+  font-weight: $semibold;
+  color: $text-color;
+  margin-bottom: 18px;
+}
+
+.tour-attractions__attraction-text {
+  font-size: 16px;
+  font-weight: $regular;
+  color: $text-color;
+  margin-bottom: 25px;
+}
+
+.tour-attractions__gallery-mark {
+  display: block;
+  font-size: 14px;
+  font-weight: $regular;
+  color: $gray;
+  margin-top: 8px;
+  margin-bottom: 35px;
+  background-color: transparent;
+}

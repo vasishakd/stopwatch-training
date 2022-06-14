@@ -1,0 +1,165 @@
+.footer {
+    background-color: $text-color;
+    padding: 50px 0 62px;
+}
+
+.footer__inner {
+    @include inner;
+    display: grid;
+    grid-template-columns: max-content 1fr max-content;
+    grid-column-gap: 20px;
+    max-width: 1890px;
+}
+
+.footer__logo {
+    margin-bottom: 12px;
+}
+
+.footer__policy-text {
+    font-size: 18px;
+    color: $white;
+    margin-bottom: 35px;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+.footer__left-content {
+    max-width: 280px;
+}
+
+.footer__center-content {
+    text-align: center;
+}
+
+.footer__menu {
+    margin-bottom: 85px;
+}
+
+.footer__menu-item {
+    display: inline-block;
+    margin-right: 40px;
+
+    &:last-child {
+        margin-right: 0;
+    }
+}
+
+.footer__menu-link {
+    font-size: 18px;
+    font-weight: $semibold;
+    color: $white;
+    text-transform: uppercase;
+    
+}
+
+.footer__copyright {
+    font-size: 18px;
+    color: $white;
+    font-weight: $semibold;
+}
+
+.footer__phone {
+    font-size: 24px;
+    color: $white;
+    font-weight: $bold;
+    margin-bottom: 3px;
+}
+
+.footer__callback-button {
+    font-size: 18px;
+    color: $white;
+    border-bottom: 1px solid $white;
+    text-transform: uppercase;
+    margin-bottom: 55px;
+}
+
+.footer__social-list {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.footer__social-item {
+    margin-right: 11px;
+    
+    &:last-child {
+        margin-right: 0;
+    }
+}
+
+.footer__social-link {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $white;
+    border-radius: 50%;
+    transition: .25s background-color ease;
+
+    &:hover, &:focus {
+        background-color: lighten($red, 35%);
+    }
+}
+
+.footer__right-content {
+    text-align: right;
+}
+
+@include screen-sm {
+    .footer__menu {
+        display: none;
+    }
+}
+
+@include tablet-md {
+    .footer__inner {
+        grid-template-columns: 1fr;
+        grid-row-gap: 16px;
+    }
+
+    .footer__left-content {
+        max-width: 100%;
+        text-align: center;
+    }
+
+    .footer__right-content {
+        text-align: center;
+    }
+
+    .footer__social-list {
+        justify-content: center;
+        margin: 10px 0;
+    }
+
+    .footer__phone {
+        display: none;
+    }
+
+    .footer__callback-button {
+        display: none;
+    }
+
+    .footer__center-content {
+        order: 1;
+    }
+
+    .footer__policy-text {
+        margin-bottom: 15px;
+    }
+}
+
+@include tablet-sm {
+    .footer__logo {
+        width: 100px;
+    }
+
+    .footer__policy-text {
+        font-size: 14px;
+    }
+
+    .footer__copyright {
+        font-size: 14px;
+    }
+}

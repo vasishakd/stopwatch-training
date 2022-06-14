@@ -1,0 +1,43 @@
+.tour-price-includings {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-column-gap: 30px;
+  margin-bottom: 80px;
+}
+
+.tour-price-includings__title {
+  font-size: 22px;
+  font-weight: $semibold;
+  margin-bottom: 20px;
+  color: $text-color;
+}
+
+.tour-price-includings__item {
+  font-size: 16px;
+  font-weight: $regular;
+  color: $text-color;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: flex-start;
+
+  &::before {
+    content: "";
+    display: block;
+    width: 16px;
+    height: 16px;
+    background-image: url("../../img/icon-check.svg");
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+    margin-right: 10px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+}
+
+.tour-price-includings__list--not-included
+  .tour-price-includings__item::before {
+  background-image: url("../../img/icon-cross.svg");
+  background-size: 11px 11px;
+}

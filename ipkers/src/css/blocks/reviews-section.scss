@@ -1,0 +1,106 @@
+.reviews-section {
+    padding: 100px 0;
+    background-color: #f4f4f4;
+}
+
+.reviews-section__inner {
+    @include inner;
+    flex-direction: column;
+    align-items: center;
+}
+
+.reviews-section__title {
+    font-size: 48px;
+    font-weight: $bold;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.reviews-section__description {
+    font-size: 24px;
+    margin-bottom: 90px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.reviews-section__reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 50px;
+    margin-bottom: 70px;
+}
+
+.reviews-section__logo {
+    margin-right: 10px;
+}
+
+.reviews-section__show-more-button {
+    width: 250px;
+    background-color: $green;
+
+    &:hover, &:focus {
+        background-color: lighten($green, 10%);
+    }
+}
+
+@include tablet-lg {
+    .reviews-section__description {
+        margin-bottom: 50px;
+    }
+
+    .reviews-section__reviews-grid {
+        grid-column-gap: 30px;
+    }
+}
+
+@include tablet-md {
+    .reviews-section__title {
+        font-size: 32px;
+    }
+
+    .reviews-section__description {
+        font-size: 18px;
+    }
+
+    .reviews-section__logo {
+        display: none;
+    }
+
+    .reviews-section__reviews-grid {
+        grid-template-columns: 1fr;
+        grid-row-gap: 30px;
+    }
+}
+
+
+@include tablet-sm {
+    .reviews-section {
+        padding: 50px 0;
+    }
+    
+    .reviews-section__title {
+        font-size: 20px;
+    }
+
+    .reviews-section__description {
+        margin-bottom: 10px;
+        font-size: 14px;
+    }
+}
+
+@include phone-lg {
+    .reviews-section__reviews-grid {
+        grid-row-gap: 0;
+        margin-bottom: 10px;
+    }
+
+    .reviews-section__show-more-button {
+        width: 100%;
+    }
+
+    .reviews-section {
+        background-color: $white;
+    }
+}

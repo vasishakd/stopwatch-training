@@ -1,0 +1,27 @@
+::selection {
+  background: rgba($black, 0.7);
+  color: $white;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  width: 1920px;
+  background-color: $white;
+  font: {
+    family: $font-family-base;
+    size: $font-size-base;
+    weight: $regular;
+  }
+  line-height: $font-line-height-base;
+}
+
+.visually-hidden {
+  position: absolute;
+  clip: rect(0 0 0 0);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+}

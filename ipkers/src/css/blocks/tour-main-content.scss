@@ -1,0 +1,30 @@
+.tour-main-content-wrapper {
+  @include inner();
+  flex-wrap: nowrap;
+  max-width: 1202px;
+}
+
+.tour-extra-content-wrapper {
+  @include inner();
+  max-width: 1202px;
+  margin-bottom: 60px;
+}
+
+.tour-main-content {
+  width: 792px;
+  margin-right: 120px;
+}
+
+.tour-main-content__title {
+  font-size: 26px;
+  font-weight: $bold;
+  color: $dark-red;
+  margin-bottom: 20px;
+}
+
+.tour-description {
+  font-size: 16px;
+  font-weight: $regular;
+  margin-bottom: 80px;
+  color: $text-color;
+}

@@ -1,0 +1,45 @@
+.tour-route {
+  margin-bottom: 80px;
+}
+
+.tour-route__item {
+  display: flex;
+  position: relative;
+  margin-bottom: 18px;
+
+  &::before {
+    content: "";
+    width: 1px;
+    height: calc(100% + 18px);
+    background-color: $green;
+    position: absolute;
+    top: 4px;
+    left: 26px;
+    z-index: -1;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  &:last-child::before {
+    display: none;
+  }
+}
+
+.tour-route__time {
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 14px;
+  font-weight: $semibold;
+  color: $green;
+  width: 56px;
+  height: 27px;
+  border: 1px solid $green;
+  border-radius: 2px;
+  margin-right: 25px;
+  background-color: $white;
+}

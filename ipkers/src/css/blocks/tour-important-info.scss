@@ -1,0 +1,24 @@
+.tour-important-info {
+  width: 100%;
+  margin-bottom: 80px;
+}
+
+.tour-important-info__grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-column-gap: 30px;
+}
+
+.tour-important-info__image {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  margin-bottom: 15px;
+}
+
+.tour-important-info__description {
+  font-size: 22px;
+  font-weight: $semibold;
+  color: $text-color;
+}

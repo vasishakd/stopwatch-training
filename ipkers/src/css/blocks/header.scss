@@ -1,0 +1,165 @@
+.header {
+    background-color: $white;
+    padding: 18px 0;
+    position: relative;
+}
+
+.header__inner {
+    @include inner;
+    max-width: 1750px;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+.header__logo-url {
+    flex-shrink: 0;
+}
+
+.header__logo {
+    width: 168px;
+    height: auto;
+}
+
+.header__contacts-box {
+    text-align: right;
+    flex-shrink: 0;
+}
+
+.header__phone-number {
+    color: $text-color;
+    font-size: 24px;
+    font-weight: $bold;
+    display: block;
+
+    &:hover {
+        color: $text-color !important;
+    }
+}
+
+.header__callback-button {
+    font-size: 18px;
+    font-weight: $semibold;
+    text-transform: uppercase;
+    border-bottom: 1px solid $text-color;
+    transition: .25s color ease, .25s border-bottom-color ease;
+
+    &:hover, &:focus {
+        color: $red;
+        border-bottom-color: $red;
+    }
+}
+
+.header__navigation {
+    margin: 0 45px;
+}
+
+.header__burger-button {
+    width: 20px;
+    height: 14px;
+    display: none;
+    position: relative;
+
+    &::before {
+        display: none;
+        content: '';
+        width: 60px;
+        height: 48px;
+        background-color: $text-color;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
+
+.header__burger-button.active {
+    .header__burger {
+        background-color: transparent;
+
+        &::before {
+            transform: rotate(45deg);
+            top: 0;
+            background-color: $white;
+        }
+
+        &::after {
+            transform: rotate(-45deg);
+            bottom: 0;
+            background-color: $white;
+        }
+    }
+
+    &::before {
+        display: block;
+    }
+}
+
+.header__burger {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background-color: $text-color;
+    position: relative;
+
+    &::before {
+        content: '';
+        width: 20px;
+        height: 2px;
+        background-color: $text-color;
+        position: absolute;
+        top: -7px;
+        left: 0;
+        transition: .25s transform ease;
+    }
+
+    &::after {
+        content: '';
+        width: 20px;
+        height: 2px;
+        background-color: $text-color;
+        position: absolute;
+        bottom: -7px;
+        left: 0;
+        transition: .25s transform ease;
+    }
+}
+
+@include screen-sm {
+    .header__phone-number {
+        font-size: 18px;
+    }
+
+    .header__callback-button {
+        font-size: 14px;
+    }
+
+    .header__navigation {
+        margin: 0 25px;
+    }
+
+    .header__logo {
+        width: 80px;
+    }
+
+    .header {
+        font-size: 18px;
+    }
+}
+
+@include tablet-lg {
+    .header__navigation {
+        display: none;
+    }
+
+    .header__contacts-box {
+        display: none;
+    }
+
+    .header {
+        padding: 10px 5px;
+    }
+
+    .header__burger-button {
+        display: block;
+    }
+}

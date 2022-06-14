@@ -1,0 +1,163 @@
+.current-tours {
+    padding: 100px 0;
+}
+
+.current-tours__inner {
+    @include inner;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1538px;
+}
+
+.current-tours__title {
+    font-size: 48px;
+    font-weight: $bold;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.current-tours__description {
+    font-size: 24px;
+    margin-bottom: 90px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.current-tours__logo {
+    margin-right: 10px;
+}
+
+.current-tours__carousel {
+    position: relative;
+    margin-bottom: 70px;
+}
+
+.current-tours__carousel__inner {
+    margin: 0 69px;
+}
+
+.current-tours__controls-button {
+    position: absolute;
+    top: 50%;
+
+
+    &:hover, &:focus {
+        opacity: 0.6;
+    }
+
+    &--left {
+        left: 0;
+        transform: rotate(90deg);
+    }
+
+    &--right {
+        right: 0;
+        transform: rotate(-90deg);
+    }
+}
+
+.current-tours__controls-icon {
+    fill: $gray;
+}
+
+.current-tours__carousel-progress {
+    width: 308px;
+    height: 3px;
+    margin: 0 auto;
+    background-color: $gray;
+    position: relative;
+}
+
+.current-tours__carousel-progress-line {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: $text-color;
+    transform-origin: left;
+    transition: .25s transform ease;
+}
+
+.current-tours__mobile-carousel {
+    display: none;
+    width: calc(100% + 30px);
+    overflow: hidden;
+    overflow-x: scroll;
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+@include tablet-lg {
+    .current-tours__description {
+        margin-bottom: 50px;
+    }
+
+    .current-tours__carousel {
+        margin-bottom: 50px;
+    }
+}
+
+@include tablet-md {
+    .current-tours__title {
+        font-size: 32px;
+    }
+
+    .current-tours__description {
+        font-size: 18px;
+    }
+
+    .current-tours__logo {
+        display: none;
+    }
+}
+
+@include tablet-sm {
+    .current-tours {
+        padding: 50px 0;
+    }
+    
+    .current-tours__title {
+        font-size: 20px;
+    }
+
+    .current-tours__description {
+        margin-bottom: 40px;
+        font-size: 14px;
+    }
+
+    .current-tours__carousel {
+        display: none;
+    }
+
+    .current-tours__mobile-carousel {
+        display: flex;
+    }
+
+    .current-tours__tour-card {
+        width: 220px;
+        margin-right: 35px;
+
+        &:last-child {
+            margin-right: 15px;
+        }
+
+        &:first-child {
+            margin-left: 15px;
+        }
+    }
+
+    .current-tours__carousel-progress {
+        display: none;
+    }
+}
+
+@include phone-lg {
+    .current-tours__carousel__inner {
+        margin: 0;
+    }
+
+    .current-tours__controls {
+        display: none;
+    }
+}
